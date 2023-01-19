@@ -4,9 +4,25 @@ const bodyParser = require("body-parser")
 const path = require("path")
 const route = require("./routes")
 const exphbs = require("express-handlebars")
-
+const session = require("express-session")
+const flash = require("connect-flash")
 const app = express()
 const porta = 5500
+
+app.use(session({
+    secret: "crud",
+    resave: true,
+    saveUninitialized: true
+}))
+
+app.use(flash())
+
+// MIDDLEWARE 
+app.use((req,res,next)=>{
+    res.locals.sucesso = req.flash("sucesso")
+    res.locals.erro = req.flash("erro")
+    next()
+})
 
 app.use(express.urlencoded({
     extended: true                            
