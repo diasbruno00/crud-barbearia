@@ -1,0 +1,38 @@
+
+    <h1 class="text-center my-2" >Realize o cadastro</h1>
+    <p class="text-center lead">nunca compartilhe seus dados </p>
+   
+
+{{#if notErros}}
+<div class="alert alert-success" role="alert">
+  Cadastro salvo com sucesso
+</div>
+{{/if}}
+
+{{#if erro}}
+<div class="alert alert-danger" role="alert">
+  {{informacoes.erros }} 
+</div>
+{{/if}}
+
+    <section>
+        <div class="container">
+            <form name="cadastro" action="/cadastro/cliente" method="post">
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome</label>
+                <input  class="form-control" type="text" name="nome" id="nome" placeholder="Informe seu nome">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input class="form-control" type="email" name="email" id="email" placeholder="Informe seu email">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Idade</label>
+                <input class="form-control"type="number" name="idade" id="idade" placeholder="Informe sua idade">
+                </div>
+                <div class="mb-3">
+                <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar Cadastro</button>
+                </div>
+                
+            </form>
+        </div>

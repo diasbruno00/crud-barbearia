@@ -1,0 +1,31 @@
+
+<h1 class="text-center my-2">Cria sua conta</h1>
+<p class="text-center lead">seja bem vindo a melhor barbearia de monlecity</p>
+
+{{#if erro}}
+<div class="alert alert-danger" role="alert">
+  {{informacoes.erros}} 
+</div>
+{{/if}}
+    
+      <div class="container my-3">
+          <form  name=login  action="/login" method="post">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email</label>
+              <input type="email"  name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">nunca compartilharemos seu e-mail com mais ninguém.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Senha</label>
+              <input type="password" class="form-control" name="senha" >
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Confirme novamente sua senha</label>
+              <input type="password" class="form-control" name="confirmarSenha" >
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Lembrar seu dados ? </label>
+      </div>
+            <button type="submit" class="btn btn-success">Login</button>
+          </form>

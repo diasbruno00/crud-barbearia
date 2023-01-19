@@ -1,0 +1,33 @@
+<h1 class="text-center">Editar clientes </h1>
+<p class="text-center lead">Altere os dados necessarios</p>
+
+{{#if sucess }}
+<div class="alert alert-success" role="alert">
+  Cadastro alterado com sucesso
+</div>
+{{/if}}
+
+
+<section>
+<div class="container">
+          {{#each lista}}
+            <form  action="/editar/cliente/{{id}}" method="post">
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome</label>
+                <input  class="form-control" type="text" value="{{nome}}" name="nome" id="nome" placeholder="">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input class="form-control" type="email" value="{{email}}" name="email" id="email" placeholder="">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Idade</label>
+                <input class="form-control"type="number" value="{{idade}}" name="idade" id="idade" placeholder="">
+                </div>
+                <div class="mb-3">
+                <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar alteracao no cadastro</button>
+                </div>
+            </form>
+            {{/ each}}
+</div>
+</section>
