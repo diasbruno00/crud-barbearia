@@ -1,13 +1,17 @@
-
-
 {{#if sucesso}}
-<div class="alert alert-success" role="alert">
-{{sucesso}}
-</div>
+  <div class="alert alert-success" role="alert">
+    {{sucesso}}
+  </div>
 {{/if}}
 
 {{#if erro}}
-<div class="alert alert-danger" role="alert">
-{{erro}}
-</div>
+  <div class="alert alert-danger" role="alert">
+    {{erro}}
+  </div>
+{{/if}}
+
+{{#if alerta}}
+  <div class="alert alert-warning" role="alert">
+    E necessario realizar login para ter acesso a essa funcionalidade
+  </div>
 {{/if}}

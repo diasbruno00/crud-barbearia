@@ -2,12 +2,17 @@ const Cliente = require("../models/cliente");
 const ClienteDAO = require("../dataBase/clienteDao");
 
 function salvarDadosClientes(req, res, next) {
-
-  const cliente = new Cliente(req.body.nome, req.body.idade, req.body.email,req.body.telefone,req.body.corte);
+  const cliente = new Cliente(
+    req.body.nome,
+    req.body.idade,
+    req.body.email,
+    req.body.telefone,
+    req.body.corte
+  );
   const clienteDao = new ClienteDAO();
 
   if (cliente.erros.length == 0) {
-    clienteDao.inserirClientesDB(cliente); 
+    clienteDao.inserirClientesDB(cliente);
     req.flash("sucesso", `${cliente.nome} cadastrado com sucsso`);
     res.redirect("/cadastro/cliente");
   } else {
@@ -47,18 +52,23 @@ async function carregarPaginaListarCliente(req, res, next) {
 }
 
 function editarDadosCliente(req, res, next) {
-
   const id = req.params.id;
   const clienteDao = new ClienteDAO();
-  const cliente = new Cliente(req.body.nome, req.body.idade, req.body.email,req.body.telefone,req.body.corte);
+  const cliente = new Cliente(
+    req.body.nome,
+    req.body.idade,
+    req.body.email,
+    req.body.telefone,
+    req.body.corte
+  );
 
-  if(cliente.erros.length > 0){
+  if (cliente.erros.length > 0) {
     req.flash("erro", `Erro: ${cliente.erros}`);
-    res.redirect(`/editar/cliente/${id}`)
-  }else{
-  clienteDao.updateClientesDB(cliente, id);
-  req.flash("sucesso", `Dados do ${cliente.nome} alterado com sucesso `);
-  res.redirect("/lista/cliente");
+    res.redirect(`/editar/cliente/${id}`);
+  } else {
+    clienteDao.updateClientesDB(cliente, id);
+    req.flash("sucesso", `Dados do ${cliente.nome} alterado com sucesso `);
+    res.redirect("/lista/cliente");
   }
 }
 

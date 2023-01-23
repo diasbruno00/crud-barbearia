@@ -12,19 +12,19 @@ class Cliente {
 
   validarFormulario() {
     if (this.email.length == 0) {
-      this.erros.push("email informado invalido ");
+      this.erros.push("Input de email vazio ");
     }
    else if (this.idade < 0) {
-      this.erros.push("Idade informada invalido ");
+      this.erros.push("Idade invalida ");
     }
    else if (this.nome.length == 0) {
-      this.erros.push("nome invalido ");
+      this.erros.push("Input nome vazio ");
     }
   else  if (this.idade.length == 0) {
-      this.erros.push("idade invalida");
+      this.erros.push("input idade vazio");
     }
-  else if (this.telefome.length ==0){
-      this.erros.push("telefone invalido")
+  else if (this.telefone.length ==0){
+      this.erros.push("input telefone vazio")
   }
   }
 }
