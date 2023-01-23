@@ -3,7 +3,7 @@ const ClienteDAO = require("../dataBase/clienteDao");
 
 function salvarDadosClientes(req, res, next) {
 
-  const cliente = new Cliente(req.body.nome, req.body.idade, req.body.email);
+  const cliente = new Cliente(req.body.nome, req.body.idade, req.body.email,req.body.telefone,req.body.corte);
   const clienteDao = new ClienteDAO();
 
   if (cliente.erros.length == 0) {
@@ -11,7 +11,7 @@ function salvarDadosClientes(req, res, next) {
     req.flash("sucesso", `${cliente.nome} cadastrado com sucsso`);
     res.redirect("/cadastro/cliente");
   } else {
-    req.flash("erro", "verifique se os dados inseridos estao corretos");
+    req.flash("erro", `Erro: ${cliente.erros}`);
     res.redirect("/cadastro/cliente");
   }
 }
@@ -47,15 +47,19 @@ async function carregarPaginaListarCliente(req, res, next) {
 }
 
 function editarDadosCliente(req, res, next) {
-  
+
   const id = req.params.id;
   const clienteDao = new ClienteDAO();
-  const cliente = new Cliente(req.body.nome, req.body.idade, req.body.email);
+  const cliente = new Cliente(req.body.nome, req.body.idade, req.body.email,req.body.telefone,req.body.corte);
 
+  if(cliente.erros.length > 0){
+    req.flash("erro", `Erro: ${cliente.erros}`);
+    res.redirect(`/editar/cliente/${id}`)
+  }else{
   clienteDao.updateClientesDB(cliente, id);
-
   req.flash("sucesso", `Dados do ${cliente.nome} alterado com sucesso `);
   res.redirect("/lista/cliente");
+  }
 }
 
 async function carregarPaginaEditarCliente(req, res, next) {
@@ -77,7 +81,6 @@ function excluirCliente(req, res, next) {
 
   clienteDao.excluirClienteDB(id);
 
-  // const listaCliente = await clienteDao.selectAllCliente()
   req.flash("sucesso", `Dados excluido com sucesso`);
   res.redirect("/lista/cliente");
 }

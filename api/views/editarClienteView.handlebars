@@ -12,12 +12,24 @@
                 <input  class="form-control" type="text" value="{{nome}}" name="nome" id="nome" placeholder="">
                 </div>
                 <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Idade</label>
+                <input class="form-control"type="number" value="{{idade}}" name="idade" id="idade" placeholder="">
+                </div>
+                <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email</label>
                 <input class="form-control" type="email" value="{{email}}" name="email" id="email" placeholder="">
                 </div>
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Idade</label>
-                <input class="form-control"type="number" value="{{idade}}" name="idade" id="idade" placeholder="">
+                <label for="exampleInputEmail1" class="form-label">Telefone</label>
+                <input class="form-control" type="tel" name="telefone" id="telefone" value="{{telefone}}" placeholder="Informe seu telefone">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Informe um corte favorito</label>
+                <select name="corte" class="form-select" aria-label="Default select example">
+                <option value="Degrade">Degrade</option>
+                <option value="Maquina 0">Maquina 0</option>
+                <option value="Maquina 1">Maquina 1</option>
+                </select>
                 </div>
                 <div class="mb-3">
                 <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar alteracao no cadastro</button>

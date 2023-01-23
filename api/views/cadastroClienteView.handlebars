@@ -1,8 +1,6 @@
 
     <h1 class="text-center my-2" >Realize o cadastro</h1>
-    <p class="text-center lead">nunca compartilhe seus dados </p>
-
-    <section>
+    
         <div class="container">
             <form name="cadastro" action="/cadastro/cliente" method="post">
                 <div class="mb-3">
@@ -10,16 +8,27 @@
                 <input  class="form-control" type="text" name="nome" id="nome" placeholder="Informe seu nome">
                 </div>
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input class="form-control" type="email" name="email" id="email" placeholder="Informe seu email">
-                </div>
-                <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Idade</label>
                 <input class="form-control"type="number" name="idade" id="idade" placeholder="Informe sua idade">
                 </div>
                 <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input class="form-control" type="email" name="email" id="email" placeholder="Informe seu email">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Telefone</label>
+                <input class="form-control" type="tel" name="telefone" id="telefone" placeholder="Informe seu telefone">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Informe um corte favorito</label>
+                <select name="corte" class="form-select" aria-label="Default select example">
+                <option value="Degrade">Degrade</option>
+                <option value="Maquina 0">Maquina 0</option>
+                <option value="Maquina 1">Maquina 1</option>
+                </select>
+                </div>
+                <div class="mb-3">
                 <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar Cadastro</button>
                 </div>
-                
             </form>
         </div>

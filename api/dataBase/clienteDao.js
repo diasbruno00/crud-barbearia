@@ -4,7 +4,7 @@ class ClienteDAO {
 
     selectAllCliente(){
         return new Promise((resolve,reject)=>{
-            db.query("select * from cliente",(erro,resultado)=>{
+            db.query("select * from cliente order by nome",(erro,resultado)=>{
                 if(erro){
                     reject(erro)
                     return
@@ -43,7 +43,7 @@ class ClienteDAO {
     
     inserirClientesDB(cliente){
         return new Promise((resolve, reject) =>{
-            db.query("insert into cliente (nome,idade,email) values (?, ?, ?)",[cliente.nome,cliente.idade,cliente.email],(erro,resultado)=>{
+            db.query("insert into cliente (nome,idade,email,telefone,corte) values (?, ?, ?,?,?)",[cliente.nome,cliente.idade,cliente.email,cliente.telefone,cliente.corte],(erro,resultado)=>{
                 if(erro){
                     reject(erro)
                     return
@@ -56,7 +56,7 @@ class ClienteDAO {
 
     updateClientesDB(cliente,id){
         return new Promise((resolve, reject) =>{
-            db.query("update cliente set nome = ?, idade = ?, email = ? where id = ?",[cliente.nome,cliente.idade,cliente.email,id],(erro,resultado)=>{
+            db.query("update cliente set nome = ?, idade = ?, email = ?,telefone = ?, corte = ? where id = ?",[cliente.nome,cliente.idade,cliente.email,cliente.telefone,cliente.corte,id],(erro,resultado)=>{
                 if(erro){
                     reject(erro)
                     return
