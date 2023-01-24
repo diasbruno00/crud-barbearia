@@ -23,10 +23,10 @@ async function salvarDadosLogin(req, res, next) {
       req.session.usuario = resultado;
       if (resultado) {
         req.flash("sucesso", `Login efetuado com sucesso`);
-        res.redirect("/login");
+        res.redirect("/login/entrar");
       } else {
         req.flash("erro", `Dados informados incorretos`);
-        res.redirect("/login");
+        res.redirect("/login/entrar");
       }
     } catch (error) {
       console.log("erro ao realizar login");
