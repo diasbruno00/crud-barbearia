@@ -23,6 +23,9 @@ route.get("/cadastro/barbeiro",barbeiroApi.carregarPaginaCadatroBarbeiro)
 route.post("/cadastro/barbeiro",barbeiroApi.salvarDadosBarbeiro)
 route.get("/lista/barbeiro",barbeiroApi.carregarPaginaListaBarbeiro)
 route.get("/excluir/barbeiro/:id",barbeiroApi.excluirDadosBarbeiro)
+route.post("/editar/barbeiro/:id",barbeiroApi.editarDadosBarbeiro)
+route.get("/editar/barbeiro/:id",barbeiroApi.carregarPaginaEditarBarbeiro)
+
 
 
 //rota pagina login

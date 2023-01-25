@@ -12,7 +12,6 @@ function salvarDadosBarbeiro(req, res, next) {
     req.body.telefone,
     req.body.especialidade
   );
-  console.log(barbeiro.erros.length);
 
   if (barbeiro.erros.length == 0) {
     req.flash("sucesso", `${barbeiro.nome} cadastrado com sucesso`);
@@ -49,9 +48,48 @@ function excluirDadosBarbeiro(req, res, next) {
   res.redirect("/lista/barbeiro");
 }
 
+function editarDadosBarbeiro(req, res, next) {
+  const id = req.params.id;
+  const barbeiroDao = new BarbeiroDao();
+  const barbeiro = new Barbeiro(
+    req.body.nome,
+    req.body.email,
+    req.body.telefone,
+    req.body.especialidade
+  );
+
+  if (barbeiro.erros.length == 0) {
+    req.flash(
+      "sucesso",
+      `${barbeiro.nome} Dados alterado com sucesso com sucesso`
+    );
+    barbeiroDao.updateBarbeiroDB(barbeiro, id);
+    res.redirect("/lista/barbeiro");
+  } else {
+    req.flash("erro", `Erro: ${barbeiro.erros}`);
+    res.redirect(`/editar/barbeiro/${id}`);
+  }
+}
+
+async function carregarPaginaEditarBarbeiro(req, res, next) {
+ 
+  try {
+    const barbeiroDao = new BarbeiroDao();
+    const id = req.params.id;
+    const lista = await barbeiroDao.selectAllIdBarbeiro(id);
+    res.render("editarBarbeiroView", { lista });
+    
+  } catch (error) {
+    console.log("Erro ao carregar dados do editar barbeiro")
+  }
+  
+}
+
 module.exports = {
   carregarPaginaCadatroBarbeiro,
   salvarDadosBarbeiro,
   carregarPaginaListaBarbeiro,
   excluirDadosBarbeiro,
+  editarDadosBarbeiro,
+  carregarPaginaEditarBarbeiro,
 };

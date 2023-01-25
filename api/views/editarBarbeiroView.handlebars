@@ -1,0 +1,35 @@
+<h1 class="text-center">Editar Barbeiro</h1>
+<p class="text-center lead">Altere os dados necessarios</p>
+
+
+<section>
+<div class="container">
+          {{#each lista}}
+            <form  action="/editar/barbeiro/{{id}}" method="post">
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome</label>
+                <input  class="form-control" type="text" value="{{nome}}" name="nome" id="nome" placeholder="">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">email</label>
+                <input class="form-control"type="email" value="{{email}}" name="email" id="" placeholder="">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">telefone</label>
+                <input class="form-control" type="tel" value="{{telefone}}" name="telefone" id="email" placeholder="">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Informe o corte de sua especialidade </label>
+                <select name="especialidade" class="form-select" aria-label="Default select example">
+                <option value="Degrade">Degrade</option>
+                <option value="Maquina 0">Maquina 0</option>
+                <option value="Maquina 1">Maquina 1</option>
+                </select>
+                </div>
+                <div class="mb-3">
+                <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar alteracao no cadastro</button>
+                </div>
+            </form>
+            {{/ each}}
+</div>
+</section>
