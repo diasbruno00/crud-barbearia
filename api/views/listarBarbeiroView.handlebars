@@ -1,0 +1,39 @@
+
+<h1 class="text-center my-2">Lista de barbeiro </h1>
+<p class="text-center lead">Edite ou exclua os dados se necessario </p>
+
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand"></a>
+    <form class="d-flex" role="search" method="get" >
+      <input class="form-control me-2" type="search" name="pesquisarBarbeiro" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="responsive-table">
+<table class="table my-2">
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">email</th>
+      <th scope="col">telefone</th>
+      <th scope="col">especialidade</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each lista}}
+     <tbody>
+       <tr>
+        <td> {{nome}}   </td> 
+        <td> {{email}}  </td> 
+        <td> {{telefone}}</td> 
+        <td> {{especialidade}}  </td> 
+        <td> <a href="/editar/barbeiro/{{id}}">Editar</a></td> 
+        <td> <a class="text-danger" href="/excluir/barbeiro/{{id}}">Excluir</a></td>
+      </tr>
+     {{/each}}
+    </tbody>
+</table>
+</div>
+
