@@ -11,7 +11,8 @@ class LoginDao {
             reject(erro);
             return;
           } else {
-            return resolve(resultado);
+            const login = JSON.parse(JSON.stringify(resultado));
+            return resolve(login[0]);
           }
         }
       );

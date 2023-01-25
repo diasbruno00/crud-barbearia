@@ -19,13 +19,12 @@ route.post("/editar/cliente/:id",middlewares.verficandoLogin,clienteApi.editarDa
 route.get("/excluir/cliente/:id",middlewares.verficandoLogin,clienteApi.excluirCliente)
 
 //rotas de barbeiro
-route.get("/cadastro/barbeiro",barbeiroApi.carregarPaginaCadatroBarbeiro)
-route.post("/cadastro/barbeiro",barbeiroApi.salvarDadosBarbeiro)
-route.get("/lista/barbeiro",barbeiroApi.carregarPaginaListaBarbeiro)
-route.get("/excluir/barbeiro/:id",barbeiroApi.excluirDadosBarbeiro)
-route.post("/editar/barbeiro/:id",barbeiroApi.editarDadosBarbeiro)
-route.get("/editar/barbeiro/:id",barbeiroApi.carregarPaginaEditarBarbeiro)
-
+route.get("/cadastro/barbeiro",middlewares.verficandoLogin,barbeiroApi.carregarPaginaCadatroBarbeiro)
+route.post("/cadastro/barbeiro",middlewares.verficandoLogin,barbeiroApi.salvarDadosBarbeiro)
+route.get("/lista/barbeiro",middlewares.verficandoLogin,barbeiroApi.carregarPaginaListaBarbeiro)
+route.get("/excluir/barbeiro/:id",middlewares.verficandoLogin,barbeiroApi.excluirDadosBarbeiro)
+route.post("/editar/barbeiro/:id",middlewares.verficandoLogin,barbeiroApi.editarDadosBarbeiro)
+route.get("/editar/barbeiro/:id",middlewares.verficandoLogin,barbeiroApi.carregarPaginaEditarBarbeiro)
 
 
 //rota pagina login
@@ -35,8 +34,6 @@ route.get("/login/deslogar",loginApi.deslogar)
 
 //rota da pagina Home
 route.get("/home", homeApi.carrregarPaginaHome)
-
-
 
 
 module.exports = route

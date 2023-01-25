@@ -16,20 +16,20 @@ async function salvarDadosLogin(req, res, next) {
 
   if (login.erros.length > 0) {
     req.flash("erro", `Erro: ${login.erros}`);
-    res.redirect("/login");
+    res.redirect("/login/entrar");
   } else {
     try {
       const resultado = await loginDao.selectAllLogin(login);
-      req.session.usuario = resultado;
-      if (resultado) {
+
+      if (resultado.email == login.email && resultado.senha == login.senha) {
+        req.session.usuario = resultado;
         req.flash("sucesso", `Login efetuado com sucesso`);
-        res.redirect("/login/entrar");
-      } else {
-        req.flash("erro", `Dados informados incorretos`);
         res.redirect("/login/entrar");
       }
     } catch (error) {
       console.log("erro ao realizar login");
+      req.flash("erro", `Dados informados nao encontrado no banco de dados`);
+      res.redirect("/login/entrar");
     }
   }
 }
