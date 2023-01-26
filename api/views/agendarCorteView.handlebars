@@ -1,0 +1,33 @@
+<h1 class="text-center my-2" >Agendar horario</h1>
+
+<div class="container">
+            <form name="cadastro" action="/agendar/corte" method="post">    
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Selecione o nome do cliente </label>
+                <select name="cliente" class="form-select" aria-label="Default select example">
+                {{#each listaClientes}}
+                <option value="{{nome}}">{{nome}}</option>
+                {{/each}}
+                </select>
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Selecione o nome do barbeiro </label>
+                <select name="barbeiro" class="form-select" aria-label="Default select example">
+                {{#each listaBarbeiros}}
+                <option value="{{nome}}">{{nome}}</option>
+                {{/each}}                
+                </select>
+                </div>
+                 <div class="mb-3">
+                 <label for="exampleInputEmail1" class="form-label">Selecione a Data</label>
+                 <input class="form-control" type="date" name="data" id="">
+                 </div>
+                 <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Selecione a hora</label>
+                <input class="form-control" type="time" name="hora" id="">
+                </div>
+                <div class="mb-5">
+                <button class="btn btn-success" type="submit" id="buttonCadastro">Agendar Horario</button>
+                </div>
+            </form>
+        </div>

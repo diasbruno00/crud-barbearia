@@ -7,6 +7,7 @@ const clienteApi = require("./api/controllers/clientesControllers")
 const loginApi = require("./api/controllers/loginControllers")
 const barbeiroApi = require("./api/controllers/barbeiroControllers")
 const loginAdminApi = require("./api/controllers/loginAdminControllers")
+const agendaApi = require('./api/controllers/agendaControllers')
 
 const Middlewares = require("./api/Middlewares/middlewares")
 const middlewares = new Middlewares()
@@ -27,8 +28,10 @@ route.get("/excluir/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.e
 route.post("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.editarDadosBarbeiro)
 route.get("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.carregarPaginaEditarBarbeiro)
 
+route.get("/agendar/corte",agendaApi.carregarPaginaAgendarCorte)
+route.post("/agendar/corte",agendaApi.salvarDadosAgendarCorte)
 
-//rota pagina login
+//rota pagina login clientes
 route.post("/login/entrar",loginApi.salvarDadosLogin)
 route.get("/login/entrar", loginApi.carregarPaginaLogin)
 route.get("/login/deslogar",loginApi.deslogar)
