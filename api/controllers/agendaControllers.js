@@ -1,49 +1,91 @@
 const Agenda = require("../models/agenda");
-const ClienteDao = require("../dataBase/clienteDao");
-const BarbeiroDao = require("../dataBase/barbeiroDao");
-const AgendaDao = require("../dataBase/agendaDao");
+const AgendaDao = require("../database/agendaDao");
 
-const clienteDao = new ClienteDao();
-const barbeiroDao = new BarbeiroDao();
-const agendaDao = new AgendaDao();
-
-async function carregarPaginaAgendarCorte(req, res, next) {
-  const listaClientes = await clienteDao.selectAllCliente();
-  const listaBarbeiros = await barbeiroDao.selectAllBarbeiro();
-
-  console.log(listaClientes);
-  res.render("agendarCorteView", {
-    listaClientes,
-    listaBarbeiros,
-  });
+function carregarPaginaAgendarCorte(req, res, next) {
+  res.render("agendarCorteView");
 }
 
 async function salvarDadosAgendarCorte(req, res, next) {
+  const agendaDao = new AgendaDao();
   const agenda = new Agenda(
-    req.body.cliente,
-    req.body.barbeiro,
+    req.body.idCliente,
+    req.body.idBarbeiro,
     req.body.data,
     req.body.hora
   );
-
-  const cliente = await clienteDao.selectAllNomeCliente(agenda.cliente);
-  const barbeiro = await barbeiroDao.selectAllBarbeiroNome(agenda.barbeiro);
-
-  console.log("id do cliente: " + cliente[0].id);
-
-  if (cliente && barbeiro) {
-    const resultado = await agendaDao.inserirAgendaDB(
-      agenda,
-      barbeiro[0].id,
-      cliente[0].id
-    );
-    console.log(resultado);
-    req.flash("sucesso", "Horario marcado com sucesso");
+  try {
+    agendaDao.inserirAgendaDB(agenda);
+    req.flash("sucesso", "Dados salvo com sucesso");
     res.redirect("/agendar/corte");
-  } else {
-    req.flas("erro", "Dados invalidos");
+  } catch (error) {
+    req.flash("erro", "dados inseridos incorretos");
     res.redirect("/agendar/corte");
   }
 }
 
-module.exports = { carregarPaginaAgendarCorte, salvarDadosAgendarCorte };
+async function carregarPaginaListaAgenda(req, res, next) {
+  const agendaDao = new AgendaDao();
+  const id = req.query.pesquisarAgenda; // id do cliente
+  if (!id) {
+    try {
+      const lista = await agendaDao.selectAllAgenda();
+      res.render("listaAgendaHorarios", { lista });
+    } catch (error) {
+      req.flash("erro", "erro ao carregar dados da agenda");
+      res.redirect("/home");
+    }
+  } else {
+    const lista = await agendaDao.selectAllDataAgenda(id);
+    res.render("listaAgendaHorarios", { lista });
+  }
+}
+
+function excluirDadosAgenda(req, res, next) {
+  const id = req.params.id;
+  const agendaDao = new AgendaDao();
+
+  agendaDao.excluirAgendaDB(id);
+  req.flash("sucesso", "dados foram excluido com sucesso");
+  res.redirect("/lista/agenda");
+}
+async function carregarPaginaEditarAgenda(req, res, next) {
+  const agendaDao = new AgendaDao();
+  const id = req.params.id;
+
+  const lista = await agendaDao.selectAllIdAgenda(id);
+
+  if (lista) {
+    res.render("editarAgendaCorteView", { lista });
+  } else {
+    req.flash("erro", "erro ao carregar dados do banco de dados");
+    res.redirect("/agendar/corte");
+  }
+}
+
+function editarDadosBarbeiro(req, res, next) {
+  try {
+    const agendaDao = new AgendaDao();
+    const id = req.query.id;
+    const agenda = new Agenda(
+      req.body.idCliente,
+      req.body.idBarbeiro,
+      req.body.data,
+      req.body.hora
+    );
+    agendaDao.updateAgendaDB(agenda, id);
+    req.flash("sucesso", "dados atualizados com sucesso");
+    res.redirect("/lista/agenda");
+  } catch (error) {
+    req.flash("erro","nao foi possivel atualizar os dados, verifique os dados informados")
+    res.redirect("/lista/agenda")
+  }
+}
+
+module.exports = {
+  carregarPaginaAgendarCorte,
+  salvarDadosAgendarCorte,
+  carregarPaginaListaAgenda,
+  excluirDadosAgenda,
+  carregarPaginaEditarAgenda,
+  editarDadosBarbeiro,
+};

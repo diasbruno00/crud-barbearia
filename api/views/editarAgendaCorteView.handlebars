@@ -1,0 +1,30 @@
+<h1 class="text-center">Editar dados da Agenda</h1>
+<p class="text-center lead">Altere os dados necessarios</p>
+
+<section>
+<div class="container">
+          {{#each lista}}
+            <form  action="/editar/agenda/{{id}}" method="post">
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Infome o ID do cliente </label>
+                <input class="form-control"type="number" value="{{clienteID}}" name="idCliente" id="idade" placeholder="Informe o ID do cliente">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Informe o ID do barbeiro </label>
+                <input class="form-control"type="number"value="{{barbeiroID}}" name="idBarbeiro" id="idade" placeholder="Informe o ID do barbeiro">
+                </div>
+                 <div class="mb-3">
+                 <label for="exampleInputEmail1" class="form-label">Selecione a Data</label>
+                 <input class="form-control" type="date" value="{{datas}}" name="data" id="">
+                 </div>
+                 <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Selecione a hora</label>
+                <input class="form-control" type="time" name="{{horas}}" value="horas" id="">
+                </div>
+                <div class="mb-3">
+                <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar alteracao no cadastro</button>
+                </div>
+            </form>
+            {{/ each}}
+</div>
+</section>

@@ -28,8 +28,14 @@ route.get("/excluir/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.e
 route.post("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.editarDadosBarbeiro)
 route.get("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.carregarPaginaEditarBarbeiro)
 
+//rotas do agendar horario
 route.get("/agendar/corte",agendaApi.carregarPaginaAgendarCorte)
 route.post("/agendar/corte",agendaApi.salvarDadosAgendarCorte)
+route.get("/lista/agenda",agendaApi.carregarPaginaListaAgenda)
+route.get("/excluir/agenda/:id", agendaApi.excluirDadosAgenda)
+route.get("/editar/agenda/:id",agendaApi.carregarPaginaEditarAgenda)
+route.post("/editar/agenda/:id",agendaApi.editarDadosBarbeiro)
+
 
 //rota pagina login clientes
 route.post("/login/entrar",loginApi.salvarDadosLogin)
@@ -40,7 +46,6 @@ route.get("/login/deslogar",loginApi.deslogar)
 route.get("/login/admin/entrar", loginAdminApi.carregarPaginaLoginAdmin)
 route.post("/login/admin/entrar", loginAdminApi.salvarDadosLoginAdmin)
 route.get("/login/admin/deslogar",loginAdminApi.deslogarAdmin)
-
 
 
 

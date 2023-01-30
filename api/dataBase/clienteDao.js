@@ -1,9 +1,10 @@
 const db = require("./db");
 
 class ClienteDAO {
+  
   selectAllCliente() {
     return new Promise((resolve, reject) => {
-      db.query("select * from cliente order by nome", (erro, resultado) => {
+      db.query("select * from cliente order by nomeCliente", (erro, resultado) => {
         if (erro) {
           reject(erro);
           return;
@@ -17,7 +18,7 @@ class ClienteDAO {
   selectAllNomeCliente(nome) {
     return new Promise((resolve, reject) => {
       db.query(
-        "select * from cliente where nome like '%" + nome + "%' ",
+        "select * from cliente where nomeCliente like '%" + nome + "%' ",
         (erro, resultado) => {
           if (erro) {
             reject(erro);
@@ -50,7 +51,7 @@ class ClienteDAO {
   inserirClientesDB(cliente) {
     return new Promise((resolve, reject) => {
       db.query(
-        "insert into cliente (nome,idade,email,telefone,corte) values (?, ?, ?,?,?)",
+        "insert into cliente (nomeCliente,idade,email,telefone,corte) values (?, ?, ?,?,?)",
         [
           cliente.nome,
           cliente.idade,
@@ -73,7 +74,7 @@ class ClienteDAO {
   updateClientesDB(cliente, id) {
     return new Promise((resolve, reject) => {
       db.query(
-        "update cliente set nome = ?, idade = ?, email = ?,telefone = ?, corte = ? where id = ?",
+        "update cliente set nomeCliente = ?, idade = ?, email = ?,telefone = ?, corte = ? where id = ?",
         [
           cliente.nome,
           cliente.idade,

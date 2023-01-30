@@ -13,26 +13,29 @@
 </nav>
 
 <div class="responsive-table">
-<table class="table my-2">
-    <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">idade</th>
-      <th scope="col">email</th>
-      <th scope="col">telefone</th>
-      <th scope="col">corte favorito</th>
+<table class="table my-2 ">
+    <tr class="table-warning" >
+      <th class="text-center" scope="col">Nome</th>
+      <th class="text-center" scope="col">idade</th>
+      <th  class="text-center" scope="col">email</th>
+      <th class="text-center" scope="col">telefone</th>
+      <th class="text-center" scope="col">corte favorito</th>
+      <th class="text-center" scope="col">identificador</th>
+
     </tr>
   </thead>
   <tbody>
      {{#each lista}}
      <tbody>
        <tr>
-        <td> {{nome}}   </td> 
-        <td> {{idade}}  </td> 
-        <td> {{email}}  </td> 
-        <td> {{telefone}}</td> 
-        <td> {{corte}}  </td> 
-        <td> <a href="/editar/cliente/{{id}}">Editar</a></td> 
-        <td> <a class="text-danger" href="/excluir/cliente/{{id}}">Excluir</a></td>
+        <td class="text-center"> {{nomeCliente}}  </td> 
+        <td class="text-center"> {{idade}}  </td> 
+        <td class="text-center"> {{email}}  </td> 
+        <td class="text-center"> {{telefone}}</tdclass=> 
+        <td class="text-center"> {{corte}}  </td> 
+        <td class="text-center"> {{id}} </td>
+        <td class="text-center"> <a href="/editar/cliente/{{id}}"> editar </a></td> 
+        <td class="text-center"> <a class="text-danger" href="/excluir/cliente/{{id}}">Excluir</a></td>
       </tr>
      {{/each}}
     </tbody>

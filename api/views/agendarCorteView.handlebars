@@ -3,20 +3,12 @@
 <div class="container">
             <form name="cadastro" action="/agendar/corte" method="post">    
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Selecione o nome do cliente </label>
-                <select name="cliente" class="form-select" aria-label="Default select example">
-                {{#each listaClientes}}
-                <option value="{{nome}}">{{nome}}</option>
-                {{/each}}
-                </select>
+                <label for="exampleInputEmail1" class="form-label">Infome o ID do cliente </label>
+                <input class="form-control"type="number" name="idCliente" id="idade" placeholder="Informe o ID do cliente">
                 </div>
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Selecione o nome do barbeiro </label>
-                <select name="barbeiro" class="form-select" aria-label="Default select example">
-                {{#each listaBarbeiros}}
-                <option value="{{nome}}">{{nome}}</option>
-                {{/each}}                
-                </select>
+                <label for="exampleInputEmail1" class="form-label">Informe o ID do barbeiro </label>
+                <input class="form-control"type="number" name="idBarbeiro" id="idade" placeholder="Informe o ID do barbeiro">
                 </div>
                  <div class="mb-3">
                  <label for="exampleInputEmail1" class="form-label">Selecione a Data</label>
