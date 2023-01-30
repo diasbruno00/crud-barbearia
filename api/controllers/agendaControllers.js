@@ -15,10 +15,10 @@ async function salvarDadosAgendarCorte(req, res, next) {
   );
   try {
     agendaDao.inserirAgendaDB(agenda);
-    req.flash("sucesso", "Dados salvo com sucesso");
+    req.flash("sucesso", "Horario agendado com sucesso");
     res.redirect("/agendar/corte");
   } catch (error) {
-    req.flash("erro", "dados inseridos incorretos");
+    req.flash("erro", "Erro: dados inseridos incorretos");
     res.redirect("/agendar/corte");
   }
 }

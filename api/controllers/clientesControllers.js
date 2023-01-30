@@ -43,7 +43,6 @@ async function carregarPaginaListarCliente(req, res, next) {
       const listaCliente = await clienteDao.selectAllCliente(); // consulta de todos os clientes do banco de dados
       res.render("listarClientesView", {
         lista: listaCliente,
-        sucess: true,
       });
     } catch (error) {
       console.log("erro ao selecionar todos os dados da tabela cliente");
@@ -52,6 +51,7 @@ async function carregarPaginaListarCliente(req, res, next) {
 }
 
 function editarDadosCliente(req, res, next) {
+
   const id = req.params.id;
   const clienteDao = new ClienteDAO();
   const cliente = new Cliente(
