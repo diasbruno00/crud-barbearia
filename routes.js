@@ -29,12 +29,12 @@ route.post("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.e
 route.get("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.carregarPaginaEditarBarbeiro)
 
 //rotas do agendar horario
-route.get("/agendar/corte",agendaApi.carregarPaginaAgendarCorte)
-route.post("/agendar/corte",agendaApi.salvarDadosAgendarCorte)
-route.get("/lista/agenda",agendaApi.carregarPaginaListaAgenda)
-route.get("/excluir/agenda/:id", agendaApi.excluirDadosAgenda)
-route.get("/editar/agenda/:id",agendaApi.carregarPaginaEditarAgenda)
-route.post("/editar/agenda/:id",agendaApi.editarDadosBarbeiro)
+route.get("/agendar/corte",middlewares.verficandoLogin,agendaApi.carregarPaginaAgendarCorte)
+route.post("/agendar/corte",middlewares.verficandoLogin,agendaApi.salvarDadosAgendarCorte)
+route.get("/lista/agenda",middlewares.verficandoLoginAdmin,agendaApi.carregarPaginaListaAgenda)
+route.get("/excluir/agenda/:id", middlewares.verficandoLoginAdmin,agendaApi.excluirDadosAgenda)
+route.get("/editar/agenda/:id",middlewares.verficandoLoginAdmin, agendaApi.carregarPaginaEditarAgenda)
+route.post("/editar/agenda/:id",middlewares.verficandoLoginAdmin,agendaApi.editarDadosBarbeiro)
 
 
 //rota pagina login clientes
