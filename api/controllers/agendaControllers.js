@@ -43,11 +43,17 @@ async function carregarPaginaListaAgenda(req, res, next) {
 function excluirDadosAgenda(req, res, next) {
   const id = req.params.id;
   const agendaDao = new AgendaDao();
+  
+  try {
 
-  agendaDao.excluirAgendaDB(id);
-  req.flash("sucesso", "dados foram excluido com sucesso");
-  res.redirect("/lista/agenda");
+    agendaDao.excluirAgendaDB(id)
+    res.json({ message: "Dados excluídos com sucesso" });
+    
+  } catch (error) {
+    console.log(error);
+  }
 }
+
 async function carregarPaginaEditarAgenda(req, res, next) {
   const agendaDao = new AgendaDao();
   const id = req.params.id;
@@ -76,8 +82,11 @@ function editarDadosBarbeiro(req, res, next) {
     req.flash("sucesso", "dados atualizados com sucesso");
     res.redirect("/lista/agenda");
   } catch (error) {
-    req.flash("erro","nao foi possivel atualizar os dados, verifique os dados informados")
-    res.redirect("/lista/agenda")
+    req.flash(
+      "erro",
+      "nao foi possivel atualizar os dados, verifique os dados informados"
+    );
+    res.redirect("/lista/agenda");
   }
 }
 

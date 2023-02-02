@@ -10,9 +10,7 @@ async function salvarDadosLogin(req, res, next) {
 
   const login = new Login(
     req.body.email,
-    req.body.senha,
-    req.body.confirmarSenha
-  );
+    req.body.senha  );
 
   if (login.erros.length > 0) {
     req.flash("erro", `Erro: ${login.erros}`);

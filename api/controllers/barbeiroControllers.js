@@ -44,8 +44,8 @@ function excluirDadosBarbeiro(req, res, next) {
   const barbeiroDao = new BarbeiroDao();
   const id = req.params.id;
   barbeiroDao.excluirBarbeiroDB(id);
-  req.flash("sucesso", "Dados excluido com sucesso");
-  res.redirect("/lista/barbeiro");
+  res.json({ message: "Dados excluídos com sucesso" });
+
 }
 
 function editarDadosBarbeiro(req, res, next) {

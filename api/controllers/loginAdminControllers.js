@@ -8,9 +8,8 @@ function carregarPaginaLoginAdmin(req, res, next) {
 async function salvarDadosLoginAdmin(req, res, next) {
   const login = new Login(
     req.body.email,
-    req.body.senha,
-    req.body.confirmarSenha
-  );
+    req.body.senha
+      );
   const loginAdminDao = new LoginAdminDao();
   try {
     if (login.erros.length == 0) {

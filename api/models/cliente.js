@@ -7,7 +7,7 @@ class Cliente {
     this.telefone = telefone;
     this.corte = corte;
     this.erros = [];
-    this.validarFormulario();
+    //this.validarFormulario();
   }
 
   validarFormulario() {

@@ -30,13 +30,69 @@
         <td class="text-center"> {{barbeiroID}}  </td> 
         <td class="text-center"> {{horas}}</td> 
         <td class="text-center"> {{datas}}  </td> 
-         <td class="text-center"> {{status}}  </td> 
-        <td class="text-center"> <a href="/editar/agenda/{{id}}"> Editar </a></td> 
-        <td class="text-center"> <a class="text-danger" href="/excluir/agenda/{{id}}">Excluir</a></td>
-          <td class="text-center"> <a class="text-success" href="///{{id}}">Finalizar</a></td>
+        <td class="text-center"> {{status}}  </td> 
+        <td class="text-center" > <a  href="/editar/agenda/{{id}}"> Editar </a></td> 
+        <td class="text-center">  <a  id="excluir" class="text-danger" href="/excluir/agenda/{{id}}">Excluir</a></td>
+        <td class="text-center"> <a class="text-success" href="///{{id}}">Finalizar</a></td>
       </tr>
      {{/each}}
     </tbody>
 </table>
 </div>
 
+
+<script>
+
+const excluirLinks = document.querySelectorAll("#excluir");
+excluirLinks.forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault();
+    mostrarAlert(event.target.href);
+  });
+});
+
+function mostrarAlert(url) {
+  Swal.fire({
+    title: "Deseja realmente excluir os dados?",
+    text: "Não sera possivel recuperar depois da exclução",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, excluir!"
+  }).then(result => {
+    if (result.isConfirmed) {
+      excluirDados(url);  
+      setTimeout(carregarPagina,4500)
+    }
+
+  });  
+}
+
+function carregarPagina(){
+window.location.reload()
+}
+
+async function excluirDados(url) {
+ 
+  fetch(url, {
+    method: "DELETE"
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Ocorreu um erro ao excluir o registro.");
+      }
+      return response.json();
+    })
+    .then(data => {
+      Swal.fire("Excluído!", "Seu registro foi excluído.", "success");
+    })
+    .catch(error => {
+      console.error(error);
+      Swal.fire("Erro", error.message, "error");
+    });
+
+ 
+}
+
+</script>

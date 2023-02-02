@@ -90,9 +90,8 @@ function excluirCliente(req, res, next) {
   const clienteDao = new ClienteDAO();
 
   clienteDao.excluirClienteDB(id);
-
-  req.flash("sucesso", `Dados excluido com sucesso`);
-  res.redirect("/lista/cliente");
+  res.json({ message: "Dados excluídos com sucesso" });
+  
 }
 
 module.exports = {

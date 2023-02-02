@@ -18,13 +18,13 @@ route.get("/cadastro/cliente",middlewares.verficandoLogin, clienteApi.carregarPa
 route.get("/lista/cliente",middlewares.verficandoLogin, clienteApi.carregarPaginaListarCliente)
 route.get("/editar/cliente/:id",middlewares.verficandoLogin,clienteApi.carregarPaginaEditarCliente)
 route.post("/editar/cliente/:id",middlewares.verficandoLogin,clienteApi.editarDadosCliente)
-route.get("/excluir/cliente/:id",middlewares.verficandoLogin,clienteApi.excluirCliente)
+route.delete("/excluir/cliente/:id",middlewares.verficandoLogin,clienteApi.excluirCliente)
 
 //rotas de barbeiro
 route.get("/cadastro/barbeiro",middlewares.verficandoLoginAdmin,barbeiroApi.carregarPaginaCadatroBarbeiro)
 route.post("/cadastro/barbeiro",middlewares.verficandoLoginAdmin,barbeiroApi.salvarDadosBarbeiro)
 route.get("/lista/barbeiro",middlewares.verficandoLoginAdmin,barbeiroApi.carregarPaginaListaBarbeiro)
-route.get("/excluir/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.excluirDadosBarbeiro)
+route.delete("/excluir/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.excluirDadosBarbeiro)
 route.post("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.editarDadosBarbeiro)
 route.get("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.carregarPaginaEditarBarbeiro)
 
@@ -32,7 +32,7 @@ route.get("/editar/barbeiro/:id",middlewares.verficandoLoginAdmin,barbeiroApi.ca
 route.get("/agendar/corte",middlewares.verficandoLogin,agendaApi.carregarPaginaAgendarCorte)
 route.post("/agendar/corte",middlewares.verficandoLogin,agendaApi.salvarDadosAgendarCorte)
 route.get("/lista/agenda",middlewares.verficandoLoginAdmin,agendaApi.carregarPaginaListaAgenda)
-route.get("/excluir/agenda/:id", middlewares.verficandoLoginAdmin,agendaApi.excluirDadosAgenda)
+route.delete("/excluir/agenda/:id", middlewares.verficandoLoginAdmin,agendaApi.excluirDadosAgenda)
 route.get("/editar/agenda/:id",middlewares.verficandoLoginAdmin, agendaApi.carregarPaginaEditarAgenda)
 route.post("/editar/agenda/:id",middlewares.verficandoLoginAdmin,agendaApi.editarDadosBarbeiro)
 
