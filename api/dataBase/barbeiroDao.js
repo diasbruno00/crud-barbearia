@@ -34,7 +34,9 @@ class BarbeiroDao {
               reject(erro);
               return;
             } else {
-              return resolve(resultado);
+              const result = JSON.parse(JSON.stringify(resultado));
+
+              return resolve(result[0]);
             }
           }
         );

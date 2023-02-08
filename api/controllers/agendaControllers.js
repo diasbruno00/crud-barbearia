@@ -1,5 +1,7 @@
 const Agenda = require("../models/agenda");
 const AgendaDao = require("../database/agendaDao");
+const ClienteDao = require("../dataBase/clienteDao");
+const BarbeiroDao = require("../dataBase/barbeiroDao");
 
 function carregarPaginaAgendarCorte(req, res, next) {
   res.render("agendarCorteView");
@@ -7,18 +9,31 @@ function carregarPaginaAgendarCorte(req, res, next) {
 
 async function salvarDadosAgendarCorte(req, res, next) {
   const agendaDao = new AgendaDao();
+  const clienteDao = new ClienteDao();
+  const barbeiroDao = new BarbeiroDao();
+
   const agenda = new Agenda(
     req.body.idCliente,
     req.body.idBarbeiro,
     req.body.data,
     req.body.hora
   );
-  try {
-    agendaDao.inserirAgendaDB(agenda);
-    req.flash("sucesso", "Horario agendado com sucesso");
-    res.redirect("/agendar/corte");
-  } catch (error) {
-    req.flash("erro", "Erro: dados inseridos incorretos");
+
+  const cliente = await clienteDao.selectAllIdCliente(req.body.idCliente);
+  console.log(cliente)
+  if (cliente) {
+    const barbeiro = await barbeiroDao.selectAllIdBarbeiro(req.body.idBarbeiro);
+    console.log(barbeiro)
+    if (barbeiro) {
+      agendaDao.inserirAgendaDB(agenda);
+      req.flash("sucesso", "Horario agendado com sucesso");
+      res.redirect("/agendar/corte");
+    } else {
+      req.flash("erro", `id: ${req.body.idBarbeiro} do barbeiro invalido`);
+      res.redirect("/agendar/corte");
+    }
+  } else {
+    req.flash("erro", `id: ${req.body.idCliente} do cliente invalido`);
     res.redirect("/agendar/corte");
   }
 }
@@ -43,12 +58,10 @@ async function carregarPaginaListaAgenda(req, res, next) {
 function excluirDadosAgenda(req, res, next) {
   const id = req.params.id;
   const agendaDao = new AgendaDao();
-  
-  try {
 
-    agendaDao.excluirAgendaDB(id)
+  try {
+    agendaDao.excluirAgendaDB(id);
     res.json({ message: "Dados excluídos com sucesso" });
-    
   } catch (error) {
     console.log(error);
   }

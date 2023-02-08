@@ -15,7 +15,7 @@ const middlewares = new Middlewares()
 //rotas de cliente
 route.post("/cadastro/cliente", middlewares.verficandoLogin,clienteApi.salvarDadosClientes )
 route.get("/cadastro/cliente",middlewares.verficandoLogin, clienteApi.carregarPaginaCadastroCliente)
-route.get("/lista/cliente",middlewares.verficandoLogin, clienteApi.carregarPaginaListarCliente)
+route.get("/lista/cliente",middlewares.verficandoLoginAdmin, clienteApi.carregarPaginaListarCliente)
 route.get("/editar/cliente/:id",middlewares.verficandoLogin,clienteApi.carregarPaginaEditarCliente)
 route.post("/editar/cliente/:id",middlewares.verficandoLogin,clienteApi.editarDadosCliente)
 route.delete("/excluir/cliente/:id",middlewares.verficandoLogin,clienteApi.excluirCliente)
@@ -46,7 +46,6 @@ route.get("/login/deslogar",loginApi.deslogar)
 route.get("/login/admin/entrar", loginAdminApi.carregarPaginaLoginAdmin)
 route.post("/login/admin/entrar", loginAdminApi.salvarDadosLoginAdmin)
 route.get("/login/admin/deslogar",loginAdminApi.deslogarAdmin)
-
 
 
 //rota da pagina Home
