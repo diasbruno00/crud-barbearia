@@ -2,6 +2,8 @@ const Agenda = require("../models/agenda");
 const AgendaDao = require("../database/agendaDao");
 const ClienteDao = require("../dataBase/clienteDao");
 const BarbeiroDao = require("../dataBase/barbeiroDao");
+const moment = require('moment');
+
 
 function carregarPaginaAgendarCorte(req, res, next) {
   res.render("agendarCorteView");
@@ -29,22 +31,36 @@ async function salvarDadosAgendarCorte(req, res, next) {
       req.flash("sucesso", "Horario agendado com sucesso");
       res.redirect("/agendar/corte");
     } else {
-      req.flash("erro", `id: ${req.body.idBarbeiro} do barbeiro invalido`);
+      req.flash("erro", `id: ${req.body.idBarbeiro} do barbeiro nao encontrado no banco de dados`);
       res.redirect("/agendar/corte");
     }
   } else {
-    req.flash("erro", `id: ${req.body.idCliente} do cliente invalido`);
+    req.flash("erro", `id: ${req.body.idCliente} do cliente nao encontrado no banco de dados`);
     res.redirect("/agendar/corte");
   }
 }
 
 async function carregarPaginaListaAgenda(req, res, next) {
   const agendaDao = new AgendaDao();
+
   const id = req.query.pesquisarAgenda; // id do cliente
   if (!id) {
     try {
-      const lista = await agendaDao.selectAllAgenda();
-      res.render("listaAgendaHorarios", { lista });
+      const  lista = await agendaDao.selectAllAgenda();
+      console.log(lista)
+      const listaFormatada = lista.map(item => {
+        const dataHoraMoment = moment(item.datas);
+        return {
+          id: item.id,
+          idCliente: item.clienteID,
+          idBarbeiro: item.barbeiroID,
+          data: dataHoraMoment.format('DD/MM/YYYY'),
+          hora: item.horas,
+          status:item.status
+        };
+      });      
+      res.render("listaAgendaHorarios", { listaFormatada });
+      console.log(listaFormatada)
     } catch (error) {
       req.flash("erro", "erro ao carregar dados da agenda");
       res.redirect("/home");

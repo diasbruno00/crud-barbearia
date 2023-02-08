@@ -23,13 +23,13 @@
     </tr>
   </thead>
   <tbody>
-  {{#each lista}}
+  {{#each listaFormatada}}
      <tbody>
        <tr>
-        <td class="text-center"> {{clienteID}}   </td> 
-        <td class="text-center"> {{barbeiroID}}  </td> 
-        <td class="text-center"> {{horas}}</td> 
-        <td class="text-center"> {{datas}}  </td> 
+        <td class="text-center"> {{idCliente}}  </td> 
+        <td class="text-center"> {{idBarbeiro}}  </td> 
+        <td class="text-center"> {{hora}}</td> 
+        <td class="text-center"> {{data}}  </td> 
         <td class="text-center"> {{status}}  </td> 
         <td class="text-center" > <a  href="/editar/agenda/{{id}}"> Editar </a></td> 
         <td class="text-center">  <a  id="excluir" class="text-danger" href="/excluir/agenda/{{id}}">Excluir</a></td>
