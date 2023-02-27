@@ -3,23 +3,34 @@
 
 <section>
 <div class="container">
-          {{#each lista}}
+          {{#each listaFormatada}}
             <form  action="/editar/agenda/{{id}}" method="post">
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Infome o ID do cliente </label>
-                <input class="form-control"type="number" value="{{clienteID}}" name="idCliente" id="idade" placeholder="Informe o ID do cliente">
-                </div>
+                <label for="exampleInputEmail1" class="form-label">Informe o seu nome</label> 
+                <select class="form-select" name="nomeCliente">
+                {{#each listaCliente}}
+                <option value= {{nomeCliente}}> {{nomeCliente}} </option>
+                 {{/each }}
+                </select>
+            </div> 
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Informe o ID do barbeiro </label>
-                <input class="form-control"type="number"value="{{barbeiroID}}" name="idBarbeiro" id="idade" placeholder="Informe o ID do barbeiro">
+    
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Informe o barbeiro da sua preferencia</label>
+                <select class="form-select" name="nomeBarbeiro">
+                {{#each listaBarbeiro}}
+                <option value={{nome}}> {{nome}} </option>
+                 {{/each }}
+                </select>
+                </div>
                 </div>
                  <div class="mb-3">
                  <label for="exampleInputEmail1" class="form-label">Selecione a Data</label>
-                 <input class="form-control" type="date" value="{{datas}}" name="data" id="">
+                 <input class="form-control" type="date" value="{{data}}" name="data" id="">
                  </div>
                  <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Selecione a hora</label>
-                <input class="form-control" type="time" name="{{horas}}" value="horas" id="">
+                <input class="form-control" type="time" name="{{hora}}" value="horas" id="">
                 </div>
                 <div class="mb-3">
                 <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar alteracao no cadastro</button>

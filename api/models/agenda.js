@@ -1,7 +1,7 @@
 class Agenda{
-    constructor(idcliente,idbarbeiro,data,hora){
-     this.idCliente = idcliente
-     this.idBarbeiro = idbarbeiro
+    constructor( cliente,barbeiro,data,hora){
+     this.idCliente = cliente
+     this.nomeBarbeiro = barbeiro
      this.datas = data
      this.horas = hora
      this.status = "Agendada"

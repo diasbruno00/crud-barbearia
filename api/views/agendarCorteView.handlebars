@@ -1,14 +1,25 @@
 <h1 class="text-center my-2" >Agendar horario</h1>
 
 <div class="container">
-            <form name="cadastro" action="/agendar/corte" method="post">    
+            <form name="cadastro" action="/agendar/corte" method="post">  
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Informe o seu nome</label> 
+                <select class="form-select" name="nomeCliente">
+                {{#each listaCliente}}
+                <option value= {{nomeCliente}}> {{nomeCliente}} </option>
+                 {{/each }}
+                </select>
+            </div> 
                 <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Infome o ID do cliente </label>
-                <input class="form-control"type="number" name="idCliente" id="idade" placeholder="Informe o ID do cliente">
+    
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Informe o barbeiro da sua preferencia</label>
+                <select class="form-select" name="nomeBarbeiro">
+                {{#each listaBarbeiro}}
+                <option value={{nome}}> {{nome}} </option>
+                 {{/each }}
+                </select>
                 </div>
-                <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Informe o ID do barbeiro </label>
-                <input class="form-control"type="number" name="idBarbeiro" id="idade" placeholder="Informe o ID do barbeiro">
                 </div>
                  <div class="mb-3">
                  <label for="exampleInputEmail1" class="form-label">Selecione a Data</label>

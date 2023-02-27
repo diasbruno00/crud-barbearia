@@ -16,9 +16,9 @@ const middlewares = new Middlewares()
 route.post("/cadastro/cliente", middlewares.verficandoLogin,clienteApi.salvarDadosClientes )
 route.get("/cadastro/cliente",middlewares.verficandoLogin, clienteApi.carregarPaginaCadastroCliente)
 route.get("/lista/cliente",middlewares.verficandoLoginAdmin, clienteApi.carregarPaginaListarCliente)
-route.get("/editar/cliente/:id",middlewares.verficandoLogin,clienteApi.carregarPaginaEditarCliente)
-route.post("/editar/cliente/:id",middlewares.verficandoLogin,clienteApi.editarDadosCliente)
-route.delete("/excluir/cliente/:id",middlewares.verficandoLogin,clienteApi.excluirCliente)
+route.get("/editar/cliente/:id",middlewares.verficandoLoginAdmin,clienteApi.carregarPaginaEditarCliente)
+route.post("/editar/cliente/:id",middlewares.verficandoLoginAdmin,clienteApi.editarDadosCliente)
+route.delete("/excluir/cliente/:id",middlewares.verficandoLoginAdmin,clienteApi.excluirCliente)
 
 //rotas de barbeiro
 route.get("/cadastro/barbeiro",middlewares.verficandoLoginAdmin,barbeiroApi.carregarPaginaCadatroBarbeiro)
@@ -50,6 +50,7 @@ route.get("/login/admin/deslogar",loginAdminApi.deslogarAdmin)
 
 //rota da pagina Home
 route.get("/home", homeApi.carrregarPaginaHome)
+
 
 
 module.exports = route

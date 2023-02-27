@@ -15,19 +15,19 @@
 <div class="responsive-table">
 <table class="table my-2">
     <tr class = "table-warning">
-      <th class="text-center" scope="col">Id do cliente</th>
-      <th class="text-center" scope="col"> Id do Barbeiro</th>
+      <th class="text-center" scope="col">Cliente</th>
+      <th class="text-center" scope="col">Barbeiro</th>
       <th class="text-center" scope="col">Hora marcada</th>
       <th class="text-center" scope="col">Data marcada</th>
-        <th class="text-center" scope="col">Status</th>
+      <th class="text-center" scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
   {{#each listaFormatada}}
      <tbody>
        <tr>
-        <td class="text-center"> {{idCliente}}  </td> 
-        <td class="text-center"> {{idBarbeiro}}  </td> 
+        <td class="text-center"> {{nomeCliente}}  </td> 
+        <td class="text-center"> {{nomeBarbeiro}}  </td> 
         <td class="text-center"> {{hora}}</td> 
         <td class="text-center"> {{data}}  </td> 
         <td class="text-center"> {{status}}  </td> 

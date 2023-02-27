@@ -2,11 +2,11 @@ const db = require("./db");
 
 class AgendaDao {
 
-  inserirAgendaDB(agenda,) {
+  inserirAgendaDB(agenda) {
     return new Promise((resolve, reject) => {
       db.query(
-        "insert into agenda (horas,datas,clienteID,barbeiroID,status) values (?,?,?,?,?)",
-        [agenda.horas, agenda.datas, agenda.idCliente, agenda.idBarbeiro ,agenda.status],
+        "insert into agenda (horas,datas,clienteID,barbeiro,status) values (?,?,?,?,?)",
+        [agenda.horas, agenda.datas, agenda.idCliente, agenda.nomeBarbeiro ,agenda.status],
         (erro, resultado) => {
           if (erro) {
             reject(erro);
@@ -75,7 +75,22 @@ class AgendaDao {
       );
     });
   }
-
+  selectAllNomesAgendados() {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "select nomeCliente, nome, a.id,a.horas,a.datas,a.status from agenda as a , cliente as c, barbeiro as b where a.clienteID = c.id and b.nome = a.barbeiro ",
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            return resolve(resultado);
+          }
+        }
+      );
+    });
+  }
+  
   selectAllDataAgenda(id) {
     return new Promise((resolve, reject) => {
       db.query(
@@ -96,6 +111,21 @@ class AgendaDao {
   selectAllAgenda() {
     return new Promise((resolve, reject) => {
       db.query("select * from agenda", (erro, resultado) => {
+        if (erro) {
+          reject(erro);
+          return;
+        } else {
+          return resolve(resultado);
+        }
+      });
+    });
+  }
+
+  
+
+  selectAllClienteAgenda() {
+    return new Promise((resolve, reject) => {
+      db.query("select clienteID from agenda", (erro, resultado) => {
         if (erro) {
           reject(erro);
           return;

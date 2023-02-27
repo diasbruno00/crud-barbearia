@@ -49,10 +49,45 @@ class ClienteDAO {
     });
   }
 
+  buscarIDporNome(nome) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "select * from cliente where nomeCliente = ?",
+        [nome],
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            const result = JSON.parse(JSON.stringify(resultado));
+            return resolve(result[0]);
+          }
+        }
+      );
+    });
+  }
+
   selectAllIdEditarCliente(id) {
     return new Promise((resolve, reject) => {
       db.query(
         "select * from cliente where id = ?",
+        [id],
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            return resolve(resultado);
+          }
+        }
+      );
+    });
+  }
+
+  selecionarNomesCliente(id) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "select nomeCliente from cliente ",
         [id],
         (erro, resultado) => {
           if (erro) {

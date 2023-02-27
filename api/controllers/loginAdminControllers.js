@@ -14,7 +14,6 @@ async function salvarDadosLoginAdmin(req, res, next) {
   try {
     if (login.erros.length == 0) {
       const resultado = await loginAdminDao.selectAllLogin(login);
-      console.log(resultado)
       if (resultado) {
         req.session.administrador = resultado;
         req.flash("sucesso", `Login efetuado com sucesso`);
