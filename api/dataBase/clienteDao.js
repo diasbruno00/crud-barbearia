@@ -49,6 +49,23 @@ class ClienteDAO {
     });
   }
 
+  selectAllIdEditarCliente(id) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "select * from cliente where id = ?",
+        [id],
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            return resolve(resultado);
+          }
+        }
+      );
+    });
+  }
+
   inserirClientesDB(cliente) {
     return new Promise((resolve, reject) => {
       db.query(

@@ -76,7 +76,7 @@ async function carregarPaginaEditarCliente(req, res, next) {
   const clienteDao = new ClienteDAO();
   const id = req.params.id;
   try {
-    const lista = await clienteDao.selectAllIdCliente(id);
+    const lista = await clienteDao.selectAllIdEditarCliente(id);
     res.render("editarClienteView", {
       lista,
     });

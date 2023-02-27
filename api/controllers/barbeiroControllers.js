@@ -76,7 +76,7 @@ async function carregarPaginaEditarBarbeiro(req, res, next) {
   try {
     const barbeiroDao = new BarbeiroDao();
     const id = req.params.id;
-    const lista = await barbeiroDao.selectAllIdBarbeiro(id);
+    const lista = await barbeiroDao.selectAllIdEditarBarbeiro(id);
     res.render("editarBarbeiroView", { lista });
     
   } catch (error) {

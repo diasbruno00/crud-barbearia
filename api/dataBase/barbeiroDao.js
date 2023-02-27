@@ -43,6 +43,25 @@ class BarbeiroDao {
       });
     }
 
+    
+    selectAllIdEditarBarbeiro(id) {
+      return new Promise((resolve, reject) => {
+        db.query(
+          "select * from barbeiro where id = ?",
+          [id],
+          (erro, resultado) => {
+            if (erro) {
+              reject(erro);
+              return;
+            } else {
+
+              return resolve(resultado);
+            }
+          }
+        );
+      });
+    }
+
     updateBarbeiroDB(barbeiro, id) {
       return new Promise((resolve, reject) => {
         db.query(

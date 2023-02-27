@@ -59,6 +59,22 @@ class AgendaDao {
       );
     });
   }
+  selectAllIdEditarAgenda(id) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "select * from agenda where id = ?",
+        [id],
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            return resolve(resultado);
+          }
+        }
+      );
+    });
+  }
 
   selectAllDataAgenda(id) {
     return new Promise((resolve, reject) => {

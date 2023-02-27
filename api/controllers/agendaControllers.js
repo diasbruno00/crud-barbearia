@@ -87,14 +87,11 @@ async function carregarPaginaEditarAgenda(req, res, next) {
   const agendaDao = new AgendaDao();
   const id = req.params.id;
 
-  const lista = await agendaDao.selectAllIdAgenda(id);
+  const lista = await agendaDao.selectAllIdEditarAgenda(id);
+  console.log("chegou aqui isso " +lista)
 
-  if (lista) {
     res.render("editarAgendaCorteView", { lista });
-  } else {
-    req.flash("erro", "erro ao carregar dados do banco de dados");
-    res.redirect("/agendar/corte");
-  }
+  
 }
 
 function editarDadosBarbeiro(req, res, next) {
