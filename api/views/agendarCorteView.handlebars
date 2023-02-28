@@ -3,23 +3,12 @@
 <div class="container">
             <form name="cadastro" action="/agendar/corte" method="post">  
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Informe o seu nome</label> 
-                <select class="form-select" name="nomeCliente">
-                {{#each listaCliente}}
-                <option value= {{nomeCliente}}> {{nomeCliente}} </option>
-                 {{/each }}
-                </select>
-            </div> 
-                <div class="mb-3">
-    
-                <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Informe o barbeiro da sua preferencia</label>
-                <select class="form-select" name="nomeBarbeiro">
-                {{#each listaBarbeiro}}
-                <option value={{nome}}> {{nome}} </option>
-                 {{/each }}
-                </select>
+                <label for="exampleInputEmail1" class="form-label">Nome do cliente</label>
+                <input  class="form-control" type="text" name="nomeCliente"  placeholder="Informe seu nome">
                 </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome do barbeiro</label>
+                <input class="form-control"type="text" name="nomeBarbeiro" placeholder="Informe o nome do barbeiro">
                 </div>
                  <div class="mb-3">
                  <label for="exampleInputEmail1" class="form-label">Selecione a Data</label>

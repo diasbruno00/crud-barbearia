@@ -22,10 +22,10 @@ class AgendaDao {
   updateAgendaDB(agenda, id) {
     return new Promise((resolve, reject) => {
       db.query(
-        "update agenda set clienteID = ?, barbeiroID = ?, horas = ?, datas = ? where id = ?",
+        "update agenda set clienteID = ?, barbeiro = ?, horas = ?, datas = ? where id = ?",
         [
           agenda.idCliente,
-          agenda.idBarbeiro,
+          agenda.nomeBarbeiro,
           agenda.horas,
           agenda.datas,
           id
@@ -33,7 +33,7 @@ class AgendaDao {
         (erro, resultado) => {
           if (erro) {
             reject(erro);
-            return;
+            return ;
           } else {
             return resolve(resultado);
           }
@@ -59,6 +59,23 @@ class AgendaDao {
       );
     });
   }
+  buscaEdicaoAgendados(id) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "select a.horas , a.datas, a.barbeiro, a.id , a.status, c.nomeCliente, a.clienteID from agenda as a , cliente as c where a.clienteID = ? AND  a.clienteID = c.id",
+        [id],
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            
+            return resolve(resultado);
+          }
+        }
+      );
+    });
+  }
   selectAllIdEditarAgenda(id) {
     return new Promise((resolve, reject) => {
       db.query(
@@ -78,7 +95,23 @@ class AgendaDao {
   selectAllNomesAgendados() {
     return new Promise((resolve, reject) => {
       db.query(
-        "select nomeCliente, nome, a.id,a.horas,a.datas,a.status from agenda as a , cliente as c, barbeiro as b where a.clienteID = c.id and b.nome = a.barbeiro ",
+        "select nomeCliente, nome, a.id,a.horas,a.datas,a.status,a.clienteID from agenda as a , cliente as c, barbeiro as b where a.clienteID = c.id and b.nome = a.barbeiro ",
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            return resolve(resultado);
+          }
+        }
+      );
+    });
+  }
+  
+  pesquisarNomeNaAgenda(nome) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "select nomeCliente, nome, a.id,a.horas,a.datas,a.status,a.clienteID from agenda as a , cliente as c, barbeiro as b where a.clienteID = c.id and b.nome = a.barbeiro  and nomeCliente = ? ",[nome],
         (erro, resultado) => {
           if (erro) {
             reject(erro);

@@ -4,25 +4,14 @@
 <section>
 <div class="container">
           {{#each listaFormatada}}
-            <form  action="/editar/agenda/{{id}}" method="post">
-                <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Informe o seu nome</label> 
-                <select class="form-select" name="nomeCliente">
-                {{#each listaCliente}}
-                <option value= {{nomeCliente}}> {{nomeCliente}} </option>
-                 {{/each }}
-                </select>
-            </div> 
-                <div class="mb-3">
-    
-                <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Informe o barbeiro da sua preferencia</label>
-                <select class="form-select" name="nomeBarbeiro">
-                {{#each listaBarbeiro}}
-                <option value={{nome}}> {{nome}} </option>
-                 {{/each }}
-                </select>
+          <form action="/editar/agenda/{{id}}" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome do cliente</label>
+                <input  class="form-control" type="text" name="nomeCliente" value = "{{nomeCliente}}" placeholder="Informe seu nome">
                 </div>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nome do barbeiro</label>
+                <input class="form-control"type="text" name="nomeBarbeiro" value="{{nomeBarbeiro}}" placeholder="Informe o nome do barbeiro">
                 </div>
                  <div class="mb-3">
                  <label for="exampleInputEmail1" class="form-label">Selecione a Data</label>
@@ -30,12 +19,12 @@
                  </div>
                  <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Selecione a hora</label>
-                <input class="form-control" type="time" name="{{hora}}" value="horas" id="">
+                <input class="form-control" type="time" name="hora" value="{{hora}}"id="">
                 </div>
                 <div class="mb-3">
                 <button class="btn btn-success" type="submit" id="buttonCadastro">Salvar alteracao no cadastro</button>
                 </div>
             </form>
-            {{/ each}}
+            {{/each}}
 </div>
 </section>
