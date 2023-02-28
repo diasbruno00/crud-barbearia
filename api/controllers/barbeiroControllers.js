@@ -45,7 +45,6 @@ function excluirDadosBarbeiro(req, res, next) {
   const id = req.params.id;
   barbeiroDao.excluirBarbeiroDB(id);
   res.json({ message: "Dados excluídos com sucesso" });
-
 }
 
 function editarDadosBarbeiro(req, res, next) {
@@ -72,17 +71,14 @@ function editarDadosBarbeiro(req, res, next) {
 }
 
 async function carregarPaginaEditarBarbeiro(req, res, next) {
- 
   try {
     const barbeiroDao = new BarbeiroDao();
     const id = req.params.id;
     const lista = await barbeiroDao.selectAllIdEditarBarbeiro(id);
     res.render("editarBarbeiroView", { lista });
-    
   } catch (error) {
-    console.log("Erro ao carregar dados do editar barbeiro")
+    console.log("Erro ao carregar dados do editar barbeiro");
   }
-  
 }
 
 module.exports = {
