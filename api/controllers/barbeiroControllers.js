@@ -5,7 +5,11 @@ function carregarPaginaCadatroBarbeiro(req, res, next) {
   res.render("cadastroBarbeiroView");
 }
 
-function salvarDadosBarbeiro(req, res, next) {
+async function salvarDadosBarbeiro(req, res, next) {
+  const barbeiroDao = new BarbeiroDao();
+
+  const lista = await barbeiroDao.selectNomeEspecificoBarbeiro(req.body.nome);
+
   const barbeiro = new Barbeiro(
     req.body.nome,
     req.body.email,
@@ -13,13 +17,18 @@ function salvarDadosBarbeiro(req, res, next) {
     req.body.especialidade
   );
 
-  if (barbeiro.erros.length == 0) {
+  if (barbeiro.erros.length > 0) {
+    req.flash("erro", `Erro: ${barbeiro.erros}`);
+    res.redirect("/cadastro/barbeiro");
+  } else if (!lista) {
     req.flash("sucesso", `${barbeiro.nome} cadastrado com sucesso`);
-    const barbeiroDao = new BarbeiroDao();
     barbeiroDao.inserirBarbeiroDB(barbeiro);
     res.redirect("/cadastro/barbeiro");
   } else {
-    req.flash("erro", `Erro: ${barbeiro.erros}`);
+    req.flash(
+      "erro",
+      `Barbeiro ${req.body.nome} ja cadastrado no banco de dados`
+    );
     res.redirect("/cadastro/barbeiro");
   }
 }
