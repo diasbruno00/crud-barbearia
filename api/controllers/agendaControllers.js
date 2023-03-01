@@ -100,6 +100,8 @@ async function carregarPaginaEditarAgenda(req, res, next) {
 
   const lista = await agendaDao.buscaEdicaoAgendados(id);
 
+  console.log("id ao carregar: "+id);
+
   const listaFormatada = lista.map((item) => {
     const dataHoraMoment = moment(item.datas);
     return {
@@ -107,20 +109,19 @@ async function carregarPaginaEditarAgenda(req, res, next) {
       nomeCliente: item.nomeCliente,
       nomeBarbeiro: item.barbeiro,
       data: dataHoraMoment.format("YYYY-MM-DD"),
-      hora: item.horas,
-      idCliente: item.clienteID,
-    };
+      hora: item.horas
+      };
   });
 
   res.render("editarAgendaCorteView", { listaFormatada });
 }
 
-async function editarDadosBarbeiro(req, res, next) {
+async function editarDadosAgenda(req, res, next) {
   const agendaDao = new AgendaDao();
   const clienteDao = new ClienteDao();
   const barbeiroDao = new BarbeiroDao();
   const id = req.params.id;
-
+  console.log("id ao salvar: "+id)
   const cliente = await clienteDao.buscarIDporNome(req.body.nomeCliente);
   const barbeiro = await barbeiroDao.selectNomeEspecificoBarbeiro( req.body.nomeBarbeiro);
 
@@ -155,5 +156,5 @@ module.exports = {
   carregarPaginaListaAgenda,
   excluirDadosAgenda,
   carregarPaginaEditarAgenda,
-  editarDadosBarbeiro,
+  editarDadosAgenda,
 };

@@ -34,7 +34,7 @@ route.post("/agendar/corte",middlewares.verficandoLogin,agendaApi.salvarDadosAge
 route.get("/lista/agenda",middlewares.verficandoLoginAdmin,agendaApi.carregarPaginaListaAgenda)
 route.delete("/excluir/agenda/:id", middlewares.verficandoLoginAdmin,agendaApi.excluirDadosAgenda)
 route.get("/editar/agenda/:id",middlewares.verficandoLoginAdmin, agendaApi.carregarPaginaEditarAgenda)
-route.post("/editar/agenda/:id",middlewares.verficandoLoginAdmin,agendaApi.editarDadosBarbeiro)
+route.post("/editar/agenda/:id",middlewares.verficandoLoginAdmin,agendaApi.editarDadosAgenda)
 
 
 //rota pagina login clientes
