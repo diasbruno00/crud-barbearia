@@ -12,7 +12,7 @@ class Middlewares {
     if (!req.session.usuario) {
       req.flash(
         "alerta",
-        "E necessario efetuar login para ter acesso a essa area"
+        "E necessario efetuar login para ter acesso a area do cliente"
       );
       req.session.save(() => {
         res.redirect("/login/entrar");
@@ -26,7 +26,7 @@ class Middlewares {
     if (!req.session.administrador) {
       req.flash(
         "alerta",
-        "E necessario efetuar login para ter acesso a essa area"
+        "E necessario efetuar login para ter acesso a area do administrador"
       );
       req.session.save(() => {
         res.redirect("/login/admin/entrar");

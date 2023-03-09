@@ -38,9 +38,25 @@ async function salvarDadosAgendarCorte(req, res, next) {
       req.body.hora
     );
 
-    agendaDao.inserirAgendaDB(agenda);
-    req.flash("sucesso", "Horario agendado com sucesso");
-    res.redirect("/agendar/corte");
+    const clienteHorarioMarcado =
+      await agendaDao.verificarDisponibilidadeDeHorarioData(
+        req.body.hora,
+        req.body.data
+      );
+
+    if (clienteHorarioMarcado) {
+      req.flash(
+        "alerta",
+        `Horario nao disponivel para corte pois ja esta agendado para outro cliente`
+      );
+      res.redirect("/agendar/corte");
+    } else {
+      
+      agendaDao.inserirAgendaDB(agenda);
+
+      req.flash("sucesso", "Horario agendado com sucesso");
+      res.redirect("/agendar/corte");
+    }
   }
 }
 
@@ -100,8 +116,6 @@ async function carregarPaginaEditarAgenda(req, res, next) {
 
   const lista = await agendaDao.buscaEdicaoAgendados(id);
 
-  console.log("id ao carregar: "+id);
-
   const listaFormatada = lista.map((item) => {
     const dataHoraMoment = moment(item.datas);
     return {
@@ -109,8 +123,8 @@ async function carregarPaginaEditarAgenda(req, res, next) {
       nomeCliente: item.nomeCliente,
       nomeBarbeiro: item.barbeiro,
       data: dataHoraMoment.format("YYYY-MM-DD"),
-      hora: item.horas
-      };
+      hora: item.horas,
+    };
   });
 
   res.render("editarAgendaCorteView", { listaFormatada });
@@ -121,9 +135,11 @@ async function editarDadosAgenda(req, res, next) {
   const clienteDao = new ClienteDao();
   const barbeiroDao = new BarbeiroDao();
   const id = req.params.id;
-  console.log("id ao salvar: "+id)
+  console.log("id ao salvar: " + id);
   const cliente = await clienteDao.buscarIDporNome(req.body.nomeCliente);
-  const barbeiro = await barbeiroDao.selectNomeEspecificoBarbeiro( req.body.nomeBarbeiro);
+  const barbeiro = await barbeiroDao.selectNomeEspecificoBarbeiro(
+    req.body.nomeBarbeiro
+  );
 
   if (!cliente) {
     req.flash(

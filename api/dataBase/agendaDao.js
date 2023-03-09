@@ -70,7 +70,20 @@ class AgendaDao {
       );
     });
   }
-
+  verificarDisponibilidadeDeHorarioData(hora,data) {
+    return new Promise((resolve, reject) => {
+      db.query("select * from agenda where datas = ? and horas = ?", [data,hora], (erro, resultado) => {
+        if (erro) {
+          reject(erro);
+          return;
+        } else {
+          const result = JSON.parse(JSON.stringify(resultado));
+          return resolve(result[0]);
+        }
+      });
+    });
+  }
+  
   selectAllIdEditarAgenda(id) {
     return new Promise((resolve, reject) => {
       db.query("select * from agenda where id = ?", [id], (erro, resultado) => {
