@@ -4,6 +4,24 @@ const ClienteDao = require("../dataBase/clienteDao");
 const BarbeiroDao = require("../dataBase/barbeiroDao");
 const moment = require("moment");
 
+async function finlaizarAgendamento(req, res, next) {
+  const id = req.params.id;
+  const agendaDao = new AgendaDao();
+
+  const lista = await agendaDao.selectAllIdAgenda(id);
+
+  const agenda = new Agenda(
+    lista.clienteID,
+    lista.barbeiro,
+    lista.datas,
+    lista.horas
+  );
+  const opcao = 'finalizado'
+  agendaDao.updateAllAgendaDB(agenda, id,opcao);
+
+  res.redirect("/lista/agenda");
+}
+
 async function carregarPaginaAgendarCorte(req, res, next) {
   res.render("agendarCorteView");
 }
@@ -51,7 +69,6 @@ async function salvarDadosAgendarCorte(req, res, next) {
       );
       res.redirect("/agendar/corte");
     } else {
-      
       agendaDao.inserirAgendaDB(agenda);
 
       req.flash("sucesso", "Horario agendado com sucesso");
@@ -135,7 +152,6 @@ async function editarDadosAgenda(req, res, next) {
   const clienteDao = new ClienteDao();
   const barbeiroDao = new BarbeiroDao();
   const id = req.params.id;
-  console.log("id ao salvar: " + id);
   const cliente = await clienteDao.buscarIDporNome(req.body.nomeCliente);
   const barbeiro = await barbeiroDao.selectNomeEspecificoBarbeiro(
     req.body.nomeBarbeiro
@@ -173,4 +189,5 @@ module.exports = {
   excluirDadosAgenda,
   carregarPaginaEditarAgenda,
   editarDadosAgenda,
+  finlaizarAgendamento
 };

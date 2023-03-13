@@ -40,7 +40,22 @@ class AgendaDao {
       );
     });
   }
-
+  updateAllAgendaDB(agenda, id, opcao) {
+    return new Promise((resolve, reject) => {
+      db.query(
+        "update agenda set clienteID = ?, barbeiro = ?, horas = ?, datas = ?, status = ? where id = ?",
+        [agenda.idCliente, agenda.nomeBarbeiro, agenda.horas, agenda.datas,opcao, id],
+        (erro, resultado) => {
+          if (erro) {
+            reject(erro);
+            return;
+          } else {
+            return resolve(resultado);
+          }
+        }
+      );
+    });
+  }
   selectAllIdAgenda(id) {
     return new Promise((resolve, reject) => {
       db.query("select * from agenda where id = ?", [id], (erro, resultado) => {
@@ -99,7 +114,7 @@ class AgendaDao {
   selectAllNomesAgendados() {
     return new Promise((resolve, reject) => {
       db.query(
-        "select nomeCliente, nome, a.id,a.horas,a.datas,a.status,a.clienteID from agenda as a , cliente as c, barbeiro as b where a.clienteID = c.id and b.nome = a.barbeiro ",
+        "select nomeCliente, nome, a.id,a.horas,a.datas,a.status,a.clienteID from agenda as a , cliente as c, barbeiro as b where a.clienteID = c.id and b.nome = a.barbeiro order by datas",
         (erro, resultado) => {
           if (erro) {
             reject(erro);

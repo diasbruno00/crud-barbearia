@@ -35,6 +35,7 @@ route.get("/lista/agenda",middlewares.verficandoLoginAdmin,agendaApi.carregarPag
 route.delete("/excluir/agenda/:id", middlewares.verficandoLoginAdmin,agendaApi.excluirDadosAgenda)
 route.get("/editar/agenda/:id",middlewares.verficandoLoginAdmin, agendaApi.carregarPaginaEditarAgenda)
 route.post("/editar/agenda/:id",middlewares.verficandoLoginAdmin,agendaApi.editarDadosAgenda)
+route.get("/finalizar/agenda/:id",middlewares.verficandoLoginAdmin,agendaApi.finlaizarAgendamento)
 
 
 //rota pagina login clientes
@@ -50,7 +51,6 @@ route.get("/login/admin/deslogar",loginAdminApi.deslogarAdmin)
 
 //rota da pagina Home
 route.get("/home", homeApi.carrregarPaginaHome)
-
 
 
 module.exports = route
